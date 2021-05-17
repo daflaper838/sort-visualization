@@ -59,9 +59,9 @@ function App() {
               <img src ={image} alt={name}/>
               </div>
               <div className='text-area'>
-              <h3>{name}</h3>
-              <h4>{title}</h4>
-              <p> {quote}</p>
+              <h3 className='title'>{name}</h3>
+              <h4 className='sub-title'>{title}</h4>
+              <p className='content'> {quote}</p>
               </div>
               </div>
             </article>
