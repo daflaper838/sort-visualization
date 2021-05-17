@@ -4,61 +4,85 @@
   padding: 0;
 }
 
-.form-container {
+.container {
+  margin: 0 auto;
+  height: 100vh;
+  width: 40%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-
-  flex-direction: column;
-  width: 70%;
-  margin: 20px auto;
 }
 
-.todo-form {
-  background-color: rgb(124, 124, 124);
-  padding: 20px 30px;
+.btn {
+  background: turquoise;
   border-radius: 5px;
+  padding: 10px;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  z-index: 9;
+}
+
+.btn :hover {
+  cursor: pointer;
+}
+
+.slides-container {
   display: flex;
   flex-direction: row;
-
-  gap: 20px;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  gap: 20px;
+}
+
+.slides {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  width: 100vh;
+  overflow: hidden;
+}
+
+.image-container {
+  border: 9px solid rgb(197, 197, 197);
+  width: 180px;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+  /* border-radius: 50%; */
+}
+
+.image-container img {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  right: 10px;
+}
+.last-slide {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.next-slide {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.active-slide {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.slide {
+  transition: all 0.3s linear;
 }
 .text-area {
-  border: none;
-  border-radius: 5px;
-  height: 50px;
-  padding: 20px 20px;
-  flex: 2;
-}
-
-input:focus {
-  outline: none;
-}
-
-.form-button {
-  border: none;
-  background: white;
-  height: 50px;
-  width: 70px;
-  border-radius: 5px;
-  cursor: pointer;
-  color: black;
-  transition: 0.5s linear;
-}
-.form-button:hover {
-  color: chartreuse;
-}
-
-.todo-container {
-  width: 100%;
-}
-p {
-  height: 50px;
-  width: inherit;
-  color: white;
-  background: rgb(124, 124, 124);
-  padding: 20px 20px;
-  margin-top: 10px;
-  border-radius: 5px;
+  width: 50vh;
+  margin: 0 auto;
 }

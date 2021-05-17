@@ -1,51 +1,75 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.css';
-import Navbar from './home/navbar'
+import {FaAngleLeft,FaAngleRight} from 'react-icons/fa';
+import people from './data';
+
 
 
 function App() {
-  const [todoList,setTodoList] = useState(null)
-  const [todo,setTodo] = useState('')
   
-  const handleChange =(e)=>{
-    e.preventDefault()
-    setTodo(e.target.value)
-  }
-  const handleSubmit = (e)=>{
-    e.preventDefault()
-   
-    console.log(todo)
-    if (todo ===''){
-      return
-    }
-    if (todoList === null ){
-      setTodoList([todo])
-       
-    } else{
-      setTodoList([...todoList,todo])
-      console.log(todoList)
-    }
-
-   setTodo('')
+    const [data,setData] = useState(people);
+    const [index,setIndex] = useState(0)
     
-  }
+    useEffect(()=>{
+      const lastIndex = data.length -1 ;
 
+   
+      if (index < 0){
+        setIndex(lastIndex)
+      }
+      if(index > lastIndex){
+        setIndex(0)
+        
+      }
+      console.log('using effect')
+      
+    },[index,data])
+
+    useEffect(()=>{
+       let slider = setInterval(()=>{
+        setIndex(index+1);
+      },3000)
+      return ()=> clearInterval(slider)
+    },[index])
+
+  
   return <>
    <main>
-     <div className='form-container' onSubmit={(e)=>handleSubmit(e)}>
-       
-        <form method='post' id='todo' className='todo-form'>
+     <div className='container'>
+       <button onClick={()=>setIndex(index - 1)} className='btn' type='btn'><FaAngleLeft/></button>
+       <div className='slides-container'>
+         {
+           data.map((person,personIndex)=>{
+             const {name,id,image,title,quote} = person;
+             let position = 'next-slide'
+             if (personIndex === index ){
+               position = 'active-slide'
   
-          <input class='text-area' type='text' value={todo} name='to-do' placeholder='type your to-do' onChange={(e)=>handleChange(e)}></input>
-          <input type='submit' value='add' className='form-button'></input>
-        </form>
-        <div className='todo-container'>
+             }
+            if (personIndex === index +1){
+               position = 'next-slide'
+         
+             }  
+             if (personIndex === index-1) {
+               position ='last-slide'
+             }
+            return <article className='slides ' key={id}>
+              <div className={`slide ${position}`}>
+              <div className='image-container'>
+              <img src ={image} alt={name}/>
+              </div>
+              <div className='text-area'>
+              <h3>{name}</h3>
+              <h4>{title}</h4>
+              <p> {quote}</p>
+              </div>
+              </div>
+            </article>
+           })
+         }
           
-          { todoList&&
-          todoList.map((item,index)=>{
-            return <p key={index}>{item}</p>
-          })}
-        </div>
+       </div>
+       <button onClick={()=>setIndex(index + 1)} className='btn' type='btn'><FaAngleRight/></button>
      </div>
       
    </main>
