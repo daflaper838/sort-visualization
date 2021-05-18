@@ -8,7 +8,8 @@ import people from './data';
 function App() {
   
     const [data,setData] = useState(people);
-    const [index,setIndex] = useState(0)
+    const [index,setIndex] = useState(0);
+    const [pause,setPause] = useState(false);
     
     useEffect(()=>{
       const lastIndex = data.length -1 ;
@@ -26,18 +27,21 @@ function App() {
     },[index,data])
 
     useEffect(()=>{
-       let slider = setInterval(()=>{
+      if (pause) return ;
+      let slider = setInterval(()=>{
         setIndex(index+1);
       },3000)
       return ()=> clearInterval(slider)
-    },[index])
+      
+    },[index,pause])
 
   
+
   return <>
    <main>
      <div className='container'>
-       <button onClick={()=>setIndex(index - 1)} className='btn' type='btn'><FaAngleLeft/></button>
-       <div className='slides-container'>
+       <button onClick={()=>setIndex(index - 1)} className='btn' type='btn'><FaAngleLeft className='icon'/></button>
+       <div className='slides-container' onMouseEnter={()=>{setPause(true)}  } onMouseLeave={()=>setPause(false)}>
          {
            data.map((person,personIndex)=>{
              const {name,id,image,title,quote} = person;
@@ -69,7 +73,7 @@ function App() {
          }
           
        </div>
-       <button onClick={()=>setIndex(index + 1)} className='btn' type='btn'><FaAngleRight/></button>
+       <button onClick={()=>setIndex(index + 1)} className='btn' type='btn'>< FaAngleRight className='icon'/></button>
      </div>
       
    </main>
