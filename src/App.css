@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  --orange: rgb(211, 112, 0);
 }
 
 .container {
@@ -26,7 +27,7 @@
   padding: 10px;
 }
 .icon {
-  color: aquamarine;
+  color: rgb(2, 24, 16);
 }
 .btn :hover {
   cursor: pointer;
@@ -115,4 +116,20 @@
   font-family: Poppins;
   font-size: 0.8rem;
   font-weight: 300;
+}
+
+.slide-header {
+  margin-bottom: 12em;
+  font-size: 3rem;
+  font-family: Poppins;
+  color: rgb(48, 70, 70);
+}
+.slide-header span {
+  color: var(--orange);
+}
+
+.quote {
+  font-size: 3rem;
+  color: var(--orange);
+  margin-top: 50px;
 }
